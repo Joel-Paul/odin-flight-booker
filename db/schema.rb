@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_024146) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_19_042217) do
   create_table "airports", force: :cascade do |t|
     t.string "IATA", limit: 3, null: false
     t.string "city", null: false
@@ -20,4 +20,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_024146) do
     t.datetime "updated_at", null: false
     t.index ["IATA"], name: "index_airports_on_IATA", unique: true
   end
+
+  create_table "flights", force: :cascade do |t|
+    t.integer "arrival_airport_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "departure_airport_id", null: false
+    t.datetime "landing", null: false
+    t.datetime "takeoff", null: false
+    t.datetime "updated_at", null: false
+    t.index ["arrival_airport_id"], name: "index_flights_on_arrival_airport_id"
+    t.index ["departure_airport_id"], name: "index_flights_on_departure_airport_id"
+  end
+
+  add_foreign_key "flights", "airports", column: "arrival_airport_id"
+  add_foreign_key "flights", "airports", column: "departure_airport_id"
 end
