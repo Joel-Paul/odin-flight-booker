@@ -1,24 +1,13 @@
-# README
+# The Odin Project: Flight Booker
+https://www.theodinproject.com/lessons/ruby-on-rails-flight-booker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Assignment
+One-way flight booker to practice populating and building dropdown menys, radio buttons, and nested submissions.
 
-Things you may want to cover:
+A typical airline booking flow:
+1. Enter desired dates / airports and click “Search”
+2. Choose from among a list of available flights
+3. Enter passenger information for all passengers
+4. Enter billing information
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Step 4 would be done via integration of something like the Paypal API, via the paypal-express gem, the paypal-sdk-merchant SDK, or Stripe.
