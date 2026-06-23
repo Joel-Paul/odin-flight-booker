@@ -1,5 +1,25 @@
 <h1>Flights</h1>
 
+<%= form_with url: "/", method: :get do |f| %>
+  <div>
+    <%= f.label :departure_code, "From:" %>
+    <%= f.collection_select :departure_code, Airport.order(:IATA), :IATA, :name, selected: params[:departure_code] %>
+  </div>
+  <div>
+    <%= f.label :arrival_code, "To:" %>
+    <%= f.collection_select :arrival_code, Airport.order(:IATA), :IATA, :name, selected: params[:arrival_code] %>
+  </div>
+  <div>
+    <%= f.label :date, "Date of departure:" %>
+    <%= f.select :date, Flight.all.map { |f| [f.takeoff.strftime("%v"), f.takeoff.strftime("%Y%m%d")] }.uniq, selected: params[:date] %>
+  </div>
+  <div>
+    <%= f.label :num_tickets, "Number of passengers:" %>
+    <%= f.select :num_tickets, [1, 2, 3, 4], selected: params[:num_tickets] %>
+  </div>
+  <%= f.submit "Search", name: nil %>
+<% end %>
+
 <% @flights.each do |f| %>
   <p><%= f.departure_airport.IATA %> -> <%= f.arrival_airport.IATA %></p>
 <% end %>
