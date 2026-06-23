@@ -20,6 +20,10 @@
   <%= f.submit "Search", name: nil %>
 <% end %>
 
+<% format = "%v %R %Z" %>
+<% if params[:date] then %>
+  <% format = "%R %Z" %>
+<% end %>
 <% @flights.each do |f| %>
-  <p><%= f.departure_airport.IATA %> -> <%= f.arrival_airport.IATA %></p>
+    <p>(<%= f.takeoff.in_time_zone("Sydney").strftime(format) %>) <%= f.departure_airport.IATA %> -> (<%= f.landing.in_time_zone("Sydney").strftime(format) %>) <%= f.arrival_airport.IATA %></p>
 <% end %>
