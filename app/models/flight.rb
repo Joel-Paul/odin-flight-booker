@@ -10,4 +10,18 @@ class Flight < ApplicationRecord
   scope :arriving_to, ->(code) { where("arrival_airport_id = ?", Airport.find_by(IATA: code).id) if code.present? }
   scope :between, ->(from, to) { departing_from(from).arriving_to(to) }
   scope :departing_on, ->(date) { where("DATE(takeoff) = ?", date) if date }
+
+  def duration
+    ActiveSupport::Duration.build(landing - takeoff)
+  end
+
+  def human_duration
+    duration.parts.except(:seconds).map do |k, v|
+      [ v, k.to_s.singularize.pluralize(v) ].join(" ")
+    end.join(" ")
+  end
+
+  def flight_info
+    [ takeoff.strftime("%R"), " -> ", landing.strftime("%R"), " (", human_duration, ")" ].join
+  end
 end

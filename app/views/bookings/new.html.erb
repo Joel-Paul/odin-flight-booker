@@ -1,0 +1,15 @@
+<h1>Book flight</h1>
+<h2>
+  <%= @flight.departure_airport.IATA%> ->
+  <%= @flight.arrival_airport.IATA%>
+</h2>
+<h3>
+  <%= @flight.departure_airport.name %> ->
+  <%= @flight.arrival_airport.name %>
+</h3>
+<p>
+    <%= @flight.takeoff.strftime("%v") %>
+</p>
+<p>
+  <%= @flight.flight_info %>
+</p>

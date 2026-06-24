@@ -20,10 +20,15 @@
   <%= f.submit "Search", name: nil %>
 <% end %>
 
-<% format = "%v %R %Z" %>
-<% if params[:date] then %>
-  <% format = "%R %Z" %>
+<% if params[:date] and @flights.first then %>
+  <%= form_with url: new_booking_url, method: :get do |f| %>
+    <%= f.hidden_field :num_tickets, value: params[:num_tickets] %>
+    <div>
+      <%= f.collection_radio_buttons :flight, @flights, :id, :flight_info, {checked: @flights.first.id, include_hidden: false} %>
+    </div>
+    <div>
+      <%= f.submit "Select", name: nil %>
+    </div>
+  <% end %>
 <% end %>
-<% @flights.each do |f| %>
-    <p>(<%= f.takeoff.in_time_zone("Sydney").strftime(format) %>) <%= f.departure_airport.IATA %> -> (<%= f.landing.in_time_zone("Sydney").strftime(format) %>) <%= f.arrival_airport.IATA %></p>
-<% end %>
+
