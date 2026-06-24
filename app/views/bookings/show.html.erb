@@ -1,0 +1,25 @@
+<h1>Booking</h1>
+<h2>
+  <%= @booking.flight.departure_airport.IATA%> ->
+  <%= @booking.flight.arrival_airport.IATA%>
+</h2>
+<h3>
+  <%= @booking.flight.departure_airport.name %> ->
+  <%= @booking.flight.arrival_airport.name %>
+</h3>
+<p>
+  <%= @booking.flight.takeoff.strftime("%v") %>
+</p>
+<p>
+  <%= @booking.flight.flight_info %>
+</p>
+
+<h2>Passengers:</h2>
+<ul>
+  <% @booking.passengers.each do |p| %>
+    <li>
+        <%= p.name %>
+        (<%= p.email %>)
+    </li>
+  <% end %>
+</ul>

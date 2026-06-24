@@ -13,3 +13,19 @@
 <p>
   <%= @flight.flight_info %>
 </p>
+
+<%= form_with model: @booking do |f| %>
+  <%= f.hidden_field :flight_id, value: @flight.id %>
+  <h4><%= pluralize(@num_tickets, "Passenger") %>:</h4>
+  <ul>
+    <%= f.fields_for :passengers do |s| %>
+      <li>
+        <%= s.label :name %>
+        <%= s.text_field :name, required: true %>
+        <%= s.label :email %>
+        <%= s.email_field :email, required: true %>
+      </li>
+    <% end %>
+  </ul>
+  <%= f.submit %>
+<% end %>
