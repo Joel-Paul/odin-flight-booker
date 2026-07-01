@@ -1,0 +1,24 @@
+<h1>Your flight has been booked!</h1>
+<p>
+  Hi <%= @passenger.name %>! <br>
+  Your booking for the following flight has been confirmed: <br>
+</p>
+
+<h3>
+  <%= @passenger.booking.flight.departure_airport.IATA%> ->
+  <%= @passenger.booking.flight.arrival_airport.IATA%>
+</h3>
+<h3>
+  <%= @passenger.booking.flight.departure_airport.name %> ->
+  <%= @passenger.booking.flight.arrival_airport.name %>
+</h3>
+<h3>
+  <%= @passenger.booking.flight.takeoff.strftime("%v") %>
+</h3>
+<h3>
+  <%= @passenger.booking.flight.flight_info %>
+</h3>
+
+<p>
+  To view your booking details, please visit this link: <%= link_to "Booking", booking_url(@passenger.booking) %>
+</p>

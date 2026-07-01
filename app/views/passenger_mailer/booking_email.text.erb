@@ -1,0 +1,15 @@
+Your flight has been booked!
+
+Hi <%= @passenger.name %>!
+
+Your booking for the following flight has been confirmed:
+
+<%= @passenger.booking.flight.departure_airport.IATA%> -> <%= @passenger.booking.flight.arrival_airport.IATA%>
+
+<%= @passenger.booking.flight.departure_airport.name %> -> <%= @passenger.booking.flight.arrival_airport.name %>
+
+<%= @passenger.booking.flight.takeoff.strftime("%v") %>
+
+<%= @passenger.booking.flight.flight_info %>
+
+To view your booking details, please visit this link: <%= booking_url(@passenger.booking) %>
