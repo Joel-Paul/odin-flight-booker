@@ -4,9 +4,9 @@ export default class extends Controller {
   static targets = [ "list", "template", "passenger" ]
 
   add() {
-    const passenger_field = document.importNode(this.templateTarget.content, true);
-    this.listTarget.appendChild(passenger_field);
-  }
+    const passenger_field = this.templateTarget.innerHTML.replace(/NEW_RECORD/g, this.passengerTargets.length)
+    this.listTarget.insertAdjacentHTML('beforeend', passenger_field)
+}
 
   remove() {
     if (this.passengerTargets.length > 1) {

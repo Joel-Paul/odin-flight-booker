@@ -34,7 +34,7 @@
     </ul>
 
     <template data-passenger-target="template">
-      <%= f.fields_for :passengers, Passenger.new do |s| %>
+      <%= f.fields_for :passengers, Passenger.new, child_index: 'NEW_RECORD' do |s| %>
         <li data-passenger-target="passenger">
           <%= s.label :name %>
           <%= s.text_field :name, required: true %>
