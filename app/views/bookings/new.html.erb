@@ -18,11 +18,13 @@
   <%= form_with model: @booking do |f| %>
 
     <%= f.hidden_field :flight_id, value: @flight.id %>
-    <h4><%= pluralize(@num_tickets, "Passenger") %>:</h4>
+    <h4><%= pluralize(@num_tickets, "Passenger") %></h4>
+    <button type="button" data-action="passenger#add">Add passenger</button>
+    <button type="button" data-action="passenger#remove">Remove passenger</button>
 
     <ul data-passenger-target="list">
       <%= f.fields_for :passengers do |s| %>
-        <li>
+        <li data-passenger-target="passenger">
           <%= s.label :name %>
           <%= s.text_field :name, required: true %>
           <%= s.label :email %>
@@ -33,7 +35,7 @@
 
     <template data-passenger-target="template">
       <%= f.fields_for :passengers, Passenger.new do |s| %>
-        <li>
+        <li data-passenger-target="passenger">
           <%= s.label :name %>
           <%= s.text_field :name, required: true %>
           <%= s.label :email %>
@@ -41,9 +43,11 @@
         </li>
       <% end %>
     </template>
-    <button type="button" data-action="passenger#add">Add passenger</button>
 
-    <%= f.submit %>
+
+    <div>
+      <%= f.submit %>
+    </div>
 
   <% end %>
 </div>
