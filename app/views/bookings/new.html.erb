@@ -14,18 +14,36 @@
   <%= @flight.flight_info %>
 </p>
 
-<%= form_with model: @booking do |f| %>
-  <%= f.hidden_field :flight_id, value: @flight.id %>
-  <h4><%= pluralize(@num_tickets, "Passenger") %>:</h4>
-  <ul>
-    <%= f.fields_for :passengers do |s| %>
-      <li>
-        <%= s.label :name %>
-        <%= s.text_field :name, required: true %>
-        <%= s.label :email %>
-        <%= s.email_field :email, required: true %>
-      </li>
-    <% end %>
-  </ul>
-  <%= f.submit %>
-<% end %>
+<div data-controller="passenger">
+  <%= form_with model: @booking do |f| %>
+
+    <%= f.hidden_field :flight_id, value: @flight.id %>
+    <h4><%= pluralize(@num_tickets, "Passenger") %>:</h4>
+
+    <ul data-passenger-target="list">
+      <%= f.fields_for :passengers do |s| %>
+        <li>
+          <%= s.label :name %>
+          <%= s.text_field :name, required: true %>
+          <%= s.label :email %>
+          <%= s.email_field :email, required: true %>
+        </li>
+      <% end %>
+    </ul>
+
+    <template data-passenger-target="template">
+      <%= f.fields_for :passengers, Passenger.new do |s| %>
+        <li>
+          <%= s.label :name %>
+          <%= s.text_field :name, required: true %>
+          <%= s.label :email %>
+          <%= s.email_field :email, required: true %>
+        </li>
+      <% end %>
+    </template>
+    <button type="button" data-action="passenger#add">Add passenger</button>
+
+    <%= f.submit %>
+
+  <% end %>
+</div>
